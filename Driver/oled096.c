@@ -243,12 +243,12 @@ void bright_ctrol(void)
 		if(bright[1]<255)
 		{
 			bright[1]++;
-			OLED_ShowNum(17,50,bright[1],3,12);			
+			OLED_ShowNum(0,54,bright[1],3,12);			
 		}
 		else
 		{
-			OLED_ShowPicture(0,50,16,32,LEDLight_ON);	
-			OLED_ShowNum(17,50,bright[1],3,12);					
+			OLED_ShowPicture(0,41,16,32,LEDLight_ON);	
+			OLED_ShowNum(0,54,bright[1],3,12);					
 		}
 		OLED_WR(bright,2,OLED_CMD);
 	}
@@ -257,12 +257,12 @@ void bright_ctrol(void)
 		if(bright[1]>0)
 		{
 			bright[1]--;
-			OLED_ShowNum(17,50,bright[1],3,12);			
+			OLED_ShowNum(0,54,bright[1],3,12);			
 		}
 		else
 		{
-			OLED_ShowPicture(0,50,16,32,LEDLight_OFF);	
-			OLED_ShowNum(17,50,bright[1],3,12);					
+			OLED_ShowPicture(0,41,16,32,LEDLight_OFF);	
+			OLED_ShowNum(0,54,bright[1],3,12);					
 		}		
 		OLED_WR(bright,2,OLED_CMD);	
 	}
