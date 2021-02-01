@@ -235,7 +235,39 @@ void Key_Ctrl(void)
 		}
 	}
 }
+uint8_t bright[2]={0x81,0x0f};
+void bright_ctrol(void)
+{
+	if(keyInput[0]==1)
+	{
+		if(bright[1]<255)
+		{
+			bright[1]++;
+			OLED_ShowNum(17,50,bright[1],3,12);			
+		}
+		else
+		{
+			OLED_ShowPicture(0,50,16,32,LEDLight_ON);	
+			OLED_ShowNum(17,50,bright[1],3,12);					
+		}
+		OLED_WR(bright,2,OLED_CMD);
+	}
+	if(keyInput[1]==1)
+	{
+		if(bright[1]>0)
+		{
+			bright[1]--;
+			OLED_ShowNum(17,50,bright[1],3,12);			
+		}
+		else
+		{
+			OLED_ShowPicture(0,50,16,32,LEDLight_OFF);	
+			OLED_ShowNum(17,50,bright[1],3,12);					
+		}		
+		OLED_WR(bright,2,OLED_CMD);	
+	}
 
+}
 void SEG_Tag(void)
 {
 		OLED_GRAM[7][127]=0xff;
@@ -264,14 +296,19 @@ void OLED_Control(void const *argument)
 	y=18;
 	for(;;)
 	{
-		//HAL_Delay(10000);
 		OLED_Clear_Soft();
-//-------------------------------------------------------//
+		
 		LightTime[0]++;
 		LightTime[1]=LightTime[0]/5;//0.5sÊ±¼ä´Á(0-1-2)
 		if(LightTime[0]>10)
-		{LightTime[0]=0;}
+		{LightTime[0]=0;}	
+//-------------------------------------------------------//
 		Key_Ctrl();
+
+		for(uint8_t i=0;i<5;i++)
+		{
+			bright_ctrol();		
+		}
 //-------------------------------------------------------//		
 		//SEG_Tag();
 		OLED_Refresh();
